@@ -1,0 +1,16 @@
+node_modules
+coverage
+.DS_Store
+dist
+*.js
+*.js.map
+*.local
+*.mjs
+*.mjs.map
+index.html
+.remote-assets
+reports/mutation
+components.d.ts
+
+# stryker temp files
+.stryker-tmp

@@ -1,0 +1,4 @@
+{
+    "extendns": "@istanbuljs/nyc-config-typescript",
+    "reporter": ["html"]
+}
