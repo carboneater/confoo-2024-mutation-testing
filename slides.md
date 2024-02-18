@@ -12,9 +12,10 @@ drawings:
   persist: false
 defaults:
   foo: true
-transition: slide-left
-title: Welcome to Slidev
+transition: none
+title: How could I have a regression?
 mdc: true
+hideInToc: true
 ---
 
 # I have 100% Coverage
@@ -29,46 +30,31 @@ But are our tests any good?
 -->
 
 ---
-transition: fade-out
+hideInToc: true
+layout: two-cols-header
 ---
 
 # $ whoami
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+Formerly DecSecOps @ FOCUS
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
+::left::
+- 10 Hosts / 50 Services
+- ~ 5 transactions/s
+- 1 environment
+- < 1 deployment/week
+- 5th dev
 
-<br>
-<br>
+::right::
+- 100 Hosts / 400 Services
+- 100 transactions/s
+- 10 environments
+- 200 deployments/day
+- 15 devs
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+::bottom::
 
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
+The cornerstone of this transformation? TESTS!
 
 ---
 layout: default
@@ -80,13 +66,14 @@ Who has:
 <v-clicks>
 
 - Tests for their code?
-- Seen these tests fail?
 - High Code Coverage?
+- Seen these tests fail?
 - Confidence in their tests?
 
 </v-clicks>
 
 ---
+hideInToc: true
 layout: default
 ---
 
@@ -191,15 +178,47 @@ Tests validate your code works as expected
 
 Coverage validates you're invoking your code
 
+We still haven't assesed how good our tests are!
+
 ---
 layout: section
 ---
 
 # Mutation Testing
 
-We still haven't assesed how good our tests are
+---
+layout: center
+level: 2
+---
+
+# Mutation Testing: RIP
+
+<v-clicks>
+
+- _Reach_ the code (Coverage)
+- _Infect_ the code
+- _Propagate_ & catch the error (Tests)
+
+</v-clicks>
 
 ---
+level: 2
+---
+
+# Mutation Testing: Mutators
+
+|Original|Mutated|
+|:---:|:---:|
+|a + b|a - b|
+|a - b|a + b|
+|a * b|a / b|
+|a / b|a * b|
+|a % b|a * b|
+
+Source: [Stryker Supported Mutators](https://stryker-mutator.io/docs/mutation-testing-elements/supported-mutators/#arithmetic-operator)
+
+---
+layout: center
 level: 2
 ---
 
@@ -209,7 +228,19 @@ level: 2
 npm i -D stryker-cli
 npx stryker init
 ```
+
 ---
+layout: center
+level: 2
+---
+
+# Stryker: Code Requirements
+
+- Tests Green
+- Acceptable Coverage
+
+---
+layout: center
 level: 2
 ---
 
@@ -248,11 +279,65 @@ import { expect } from "chai";
 import { divideBy } from "../src/divide-by.mjs";
 
 describe("Error Handling Tests", () => {
-  it("Doesn't Throw on Non-0 Argument", () =>
-    expect(divideBy(1, 1)).to.not.throw);
+  it("Existence Check", () => expect(divideBy).to.exist);
   it("Explicit Notation", () =>
     expect(() => divideBy(1, 0)).to.throw("Division by 0 is Invalid!"));
   it("Result Expression", () => expect(divideBy(4,2)).equals(2));
+  it("Integer Division", () => expect(divideBy(4,2)).equals(2));
 });
 
 ```
+---
+level: 2
+---
+
+# And Another Thing...
+
+> All tests/coverage-quirks.tes.mjs  
+>  ✘ Error Handling Tests Existence Check (covered 0)  
+>  ✓ Error Handling Tests Explicit Notation (killed 5)  
+>  ✓ Error Handling Tests Result Expression (killed 1)  
+>  ✓ Error Handling Tests Integer Division (killed 1)
+
+
+---
+level: 2
+---
+# Final Tests... For Real!
+
+```ts
+import "mocha";
+import { expect } from "chai";
+import { divideBy } from "../src/divide-by.mjs";
+
+describe("Error Handling Tests", () => {
+  it("Explicit Notation", () =>
+    expect(() => divideBy(1, 0)).to.throw("Division by 0 is Invalid!"));
+  it("Result Expression", () => expect(divideBy(4,2)).equals(2));
+  it("Integer Division", () => expect(divideBy(4,2)).equals(2));
+});
+
+```
+
+---
+hideInToc: true
+---
+# Conclusion
+
+- Code Coverage is *great* to know what's not tested
+- Mutation Testing allows us to assert the validity of our tests
+
+--
+
+> All those giving Code Coverage a hard time  
+> Should pick up Mutation Testing  
+> - Me. 2024
+
+---
+hideInToc: true
+layout: end
+---
+
+# Thank You!
+
+[https://github.com/carboneater/confoo-2024-mutation-testing](https://github.com/carboneater/confoo-2024-mutation-testing)
