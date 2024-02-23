@@ -2,6 +2,7 @@
 theme: seriph
 background: https://source.unsplash.com/collection/94734566/1920x1080
 class: text-center
+colorSchema: light
 highlighter: shiki
 lineNumbers: false
 info: |
@@ -57,6 +58,7 @@ Formerly DecSecOps @ FOCUS
 The cornerstone of this transformation? TESTS!
 
 ---
+hideInToc: true
 layout: default
 ---
 
@@ -202,6 +204,16 @@ level: 2
 </v-clicks>
 
 ---
+layout: center
+level: 2
+---
+
+# Mutation Testing: Code Requirements
+
+- Tests Green
+- Acceptable Coverage
+
+---
 level: 2
 ---
 
@@ -218,6 +230,12 @@ level: 2
 Source: [Stryker Supported Mutators](https://stryker-mutator.io/docs/mutation-testing-elements/supported-mutators/#arithmetic-operator)
 
 ---
+image: https://stryker-mutator.io/images/stryker-man.svg
+layout: image
+---
+
+
+---
 layout: center
 level: 2
 ---
@@ -228,16 +246,6 @@ level: 2
 npm i -D stryker-cli
 npx stryker init
 ```
-
----
-layout: center
-level: 2
----
-
-# Stryker: Code Requirements
-
-- Tests Green
-- Acceptable Coverage
 
 ---
 layout: center
@@ -282,7 +290,6 @@ describe("Error Handling Tests", () => {
   it("Existence Check", () => expect(divideBy).to.exist);
   it("Explicit Notation", () =>
     expect(() => divideBy(1, 0)).to.throw("Division by 0 is Invalid!"));
-  it("Result Expression", () => expect(divideBy(4,2)).equals(2));
   it("Integer Division", () => expect(divideBy(4,2)).equals(2));
 });
 
@@ -313,7 +320,6 @@ import { divideBy } from "../src/divide-by.mjs";
 describe("Error Handling Tests", () => {
   it("Explicit Notation", () =>
     expect(() => divideBy(1, 0)).to.throw("Division by 0 is Invalid!"));
-  it("Result Expression", () => expect(divideBy(4,2)).equals(2));
   it("Integer Division", () => expect(divideBy(4,2)).equals(2));
 });
 
@@ -327,7 +333,7 @@ hideInToc: true
 - Code Coverage is *great* to know what's not tested
 - Mutation Testing allows us to assert the validity of our tests
 
---
+---
 
 > All those giving Code Coverage a hard time  
 > Should pick up Mutation Testing  
