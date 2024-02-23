@@ -333,7 +333,7 @@ hideInToc: true
 - Code Coverage is *great* to know what's not tested
 - Mutation Testing allows us to assert the validity of our tests
 
----
+--
 
 > All those giving Code Coverage a hard time  
 > Should pick up Mutation Testing  
