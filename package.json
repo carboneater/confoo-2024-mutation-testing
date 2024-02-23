@@ -5,7 +5,9 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "pretest": "npx tsc",
+    "test": "npx c8 mocha"
   },
   "dependencies": {
     "@slidev/cli": "^0.47.1",
